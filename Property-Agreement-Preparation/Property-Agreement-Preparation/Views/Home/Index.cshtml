@@ -24,6 +24,7 @@
         margin-bottom: 0 !important;
     }
 
+    /* HERO SECTION STYLES */
     .hero-section {
         text-align: center;
         padding: 60px 20px 40px;
@@ -86,6 +87,7 @@
             margin-top: 5px;
         }
 
+    /* MAIN CONTAINER & CARD STYLES */
     .main-container {
         max-width: 1100px;
         margin: 0 auto;
@@ -135,6 +137,11 @@
         color: white;
     }
 
+    .card-body {
+        padding: 50px 40px;
+    }
+
+    /* STEPS INDICATOR STYLES */
     .steps-indicator {
         display: flex;
         justify-content: space-between;
@@ -175,10 +182,7 @@
         opacity: 0.9;
     }
 
-    .card-body {
-        padding: 50px 40px;
-    }
-
+    /* FILE UPLOAD GRID & CARD STYLES */
     .upload-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -196,6 +200,9 @@
         cursor: pointer;
         position: relative;
         overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
         .upload-card:hover {
@@ -258,11 +265,12 @@
     }
 
     .file-formats {
-        display: inline-flex;
+        display: flex;
         gap: 6px;
         flex-wrap: wrap;
         justify-content: center;
         margin-bottom: 15px;
+        width: 100%;
     }
 
         .file-formats span {
@@ -281,48 +289,33 @@
         cursor: pointer;
     }
 
-    .default-file-display {
+    /* FILE DISPLAY STYLES (UNIFIED) */
+    .default-file-display,
+    .selected-file-display {
         display: inline-flex;
         align-items: center;
         gap: 8px;
         padding: 10px 16px;
-        background: #fff;
-        border: 2px solid #667eea;
         border-radius: 10px;
         font-size: 13px;
-        color: #5b21b6;
         font-weight: 600;
         margin-top: 12px;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .default-file-display {
+        background: #fff;
+        border: 2px solid #667eea;
+        color: #5b21b6;
         box-shadow: 0 2px 8px rgba(102, 126, 234, 0.15);
     }
 
-        .default-file-display .file-icon {
-            font-size: 16px;
-        }
-
-        .default-file-display .default-badge {
-            background: #fef3c7;
-            color: #92400e;
-            padding: 2px 8px;
-            border-radius: 6px;
-            font-size: 10px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
     .selected-file-display {
         display: none;
-        align-items: center;
-        gap: 8px;
-        padding: 10px 16px;
         background: #dcfce7;
         border: 2px solid #86efac;
-        border-radius: 10px;
-        font-size: 13px;
         color: #166534;
-        font-weight: 600;
-        margin-top: 12px;
         animation: slideIn 0.3s ease;
     }
 
@@ -330,39 +323,43 @@
             display: inline-flex;
         }
 
-        .selected-file-display .check-icon {
-            font-size: 16px;
-        }
-
-        .selected-file-display .remove-btn {
-            margin-left: 8px;
-            background: #dc2626;
-            color: white;
-            border: none;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 12px;
-            transition: all 0.2s ease;
-        }
-
-            .selected-file-display .remove-btn:hover {
-                background: #b91c1c;
-                transform: scale(1.1);
-            }
-
-    .relationship-section {
-        background: linear-gradient(135deg, #fff9e6 0%, #fef3c7 100%);
-        border: 2px solid #fde68a;
-        border-radius: 16px;
-        padding: 30px;
-        margin-bottom: 40px;
+    .file-icon {
+        font-size: 16px;
     }
 
+    .default-badge {
+        background: #fef3c7;
+        color: #92400e;
+        padding: 2px 8px;
+        border-radius: 6px;
+        font-size: 10px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .remove-btn {
+        margin-left: 8px;
+        background: #dc2626;
+        color: white;
+        border: none;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 12px;
+        transition: all 0.2s ease;
+    }
+
+        .remove-btn:hover {
+            background: #b91c1c;
+            transform: scale(1.1);
+        }
+
+    /* SECTION HEADER STYLES (REUSABLE) */
     .section-header {
         display: flex;
         align-items: center;
@@ -388,66 +385,124 @@
         color: #0f172a;
     }
 
-    .info-box {
-        background: white;
-        border: 2px solid #fde68a;
-        border-radius: 12px;
-        padding: 15px 20px;
-        margin-bottom: 20px;
-    }
-
-        .info-box .info-title {
-            font-size: 14px;
-            font-weight: 700;
-            color: #92400e;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .info-box .info-text {
-            font-size: 13px;
-            color: #64748b;
-            line-height: 1.6;
-        }
-
-    .relationship-input {
-        width: 100%;
-        padding: 15px;
-        border: 2px solid #fde68a;
-        border-radius: 12px;
-        font-size: 14px;
-        font-family: 'Consolas', 'Courier New', monospace;
-        min-height: 120px;
-        resize: vertical;
-        transition: all 0.3s ease;
-        background: white;
-    }
-
-        .relationship-input:focus {
-            outline: none;
-            border-color: #f59e0b;
-            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
-        }
-
-        .relationship-input::placeholder {
-            color: #94a3b8;
-            font-size: 13px;
-        }
-
-    .output-selector {
-        background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
-        border: 2px solid #93c5fd;
+    /* SECTION WRAPPERS (UNIFIED) */
+    .relationship-section,
+    .output-selector,
+    .signature-section-wrapper {
         border-radius: 16px;
         padding: 30px;
         margin-bottom: 40px;
+        border: 2px solid;
+    }
+
+    .relationship-section {
+        background: linear-gradient(135deg, #fff9e6 0%, #fef3c7 100%);
+        border-color: #fde68a;
+    }
+
+    .output-selector {
+        background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+        border-color: #93c5fd;
     }
 
         .output-selector .section-icon {
             background: linear-gradient(135deg, #3b82f6, #2563eb);
         }
 
+    .signature-section-wrapper {
+        background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%);
+        border-color: #f9a8d4;
+    }
+
+        .signature-section-wrapper .section-icon {
+            background: linear-gradient(135deg, #ec4899, #db2777);
+        }
+
+    /* INFO BOX STYLES */
+    .info-box {
+        background: white;
+        border: 2px solid;
+        border-radius: 12px;
+        padding: 15px 20px;
+        margin-bottom: 20px;
+    }
+
+    .relationship-section .info-box {
+        border-color: #fde68a;
+    }
+
+    .info-box .info-title {
+        font-size: 14px;
+        font-weight: 700;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .relationship-section .info-box .info-title {
+        color: #92400e;
+    }
+
+    .info-box .info-text {
+        font-size: 13px;
+        color: #64748b;
+        line-height: 1.6;
+    }
+
+    .info-text code {
+        background: #fde68a;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-family: 'Consolas', 'Courier New', monospace;
+        font-size: 12px;
+        color: #92400e;
+    }
+
+    /* INPUT STYLES (UNIFIED) */
+    .relationship-input,
+    .text-input {
+        width: 100%;
+        padding: 12px 15px;
+        border: 2px solid;
+        border-radius: 10px;
+        font-size: 14px;
+        transition: all 0.3s ease;
+    }
+
+    .relationship-input {
+        border-color: #fde68a;
+        font-family: 'Consolas', 'Courier New', monospace;
+        min-height: 120px;
+        resize: vertical;
+    }
+
+    .text-input {
+        border-color: #f9a8d4;
+    }
+
+        .relationship-input:focus,
+        .text-input:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
+        }
+
+    .relationship-input:focus {
+        border-color: #f59e0b;
+    }
+
+    .text-input:focus {
+        border-color: #ec4899;
+        box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.1);
+    }
+
+    .relationship-input::placeholder,
+    .text-input::placeholder {
+        color: #94a3b8;
+        font-size: 13px;
+    }
+
+    /* OUTPUT OPTIONS STYLES */
     .output-options {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -505,19 +560,7 @@
         line-height: 1.5;
     }
 
-    /* DIGITAL SIGNATURE SECTION STYLES */
-    .signature-section-wrapper {
-        background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%);
-        border: 2px solid #f9a8d4;
-        border-radius: 16px;
-        padding: 30px;
-        margin-bottom: 40px;
-    }
-
-        .signature-section-wrapper .section-icon {
-            background: linear-gradient(135deg, #ec4899, #db2777);
-        }
-
+    /* DIGITAL SIGNATURE STYLES */
     .celldiv {
         margin: 20px 0;
     }
@@ -614,21 +657,6 @@
         font-style: italic;
     }
 
-    .text-input {
-        width: 100%;
-        padding: 12px 15px;
-        border: 2px solid #f9a8d4;
-        border-radius: 10px;
-        font-size: 14px;
-        transition: all 0.3s ease;
-    }
-
-        .text-input:focus {
-            outline: none;
-            border-color: #ec4899;
-            box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.1);
-        }
-
     .helper-text {
         font-size: 12px;
         color: #64748b;
@@ -651,6 +679,17 @@
             color: #92400e;
         }
 
+        .note-box ul {
+            list-style-type: disc;
+            margin: 8px 0 0 20px;
+            padding: 0;
+        }
+
+            .note-box ul li {
+                margin-bottom: 4px;
+            }
+
+    /* BUTTON STYLES */
     .generate-button {
         width: 100%;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -695,6 +734,7 @@
             display: block;
         }
 
+    /* FEATURES GRID */
     .features-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -733,23 +773,7 @@
             line-height: 1.5;
         }
 
-    .info-text code {
-        background: #fde68a;
-        padding: 2px 6px;
-        border-radius: 4px;
-        font-family: 'Consolas', 'Courier New', monospace;
-        font-size: 12px;
-        color: #92400e;
-    }
-
-    .note-box ul {
-        list-style-type: disc;
-    }
-
-        .note-box ul li {
-            margin-bottom: 4px;
-        }
-
+    /* ANIMATIONS */
     @@keyframes fadeInDown {
         from {
             opacity: 0;
@@ -914,11 +938,12 @@
                         <div class="file-formats">
                             <span>.DOCX</span>
                             <span>.DOC</span>
-                            <span>.DOTX</span>
+                            <span>.MD</span>
                             <span>.RTF</span>
+                            <span>.HTML</span>
                         </div>
                         @* CHANGE: name="file" → name="TemplateFile" *@
-                        @Html.TextBox("TemplateFile", null, new { type = "file", accept = ".doc,.docx,.rtf,.dot,.dotm,.dotx,.docm", onchange = "handleFileSelect(this, 'template')" })
+                        @Html.TextBox("TemplateFile", null, new { type = "file", accept = ".doc,.docx,.rtf,.dot,.dotm,.dotx,.docm,.md,.txt,.html", onchange = "handleFileSelect(this, 'template')" })
 
                         <div class="default-file-display" id="default-template">
                             <span class="file-icon">📑</span>
@@ -973,25 +998,28 @@
                         <div class="info-text">
                             <strong>Format:</strong> <code>TableName | Relationship</code><br />
                             <strong>Parent Table:</strong> Use <code>string.Empty</code> for the first table<br />
-                            <strong>Child Tables:</strong> Use format <code>ChildColumn = %ParentTable.ParentColumn%</code>
+                            <strong>Child Tables:</strong> Use format <code>ChildColumn = %ParentTable.ParentColumn%</code><br />
+                            <strong>📌 Note:</strong> If you're using the default template, use the relationship string provided below. For custom templates, modify the relationships according to your database structure.
                         </div>
                     </div>
 
                     <div class="info-box" style="background: #fef3c7; border-color: #fbbf24;">
                         <div class="info-title" style="color: #92400e;">
-                            <span>📋</span> Example (Copy & Modify)
+                            <span>📋</span> Default Template Relationship String
                         </div>
                         <div class="info-text" style="font-family: 'Consolas', monospace; color: #78350f; font-size: 13px; line-height: 1.8;">
                             Properties | string.Empty<br />
                             Owners | PropertyID = %Properties.PropertyID%<br />
                             Transactions | PropertyID = %Properties.PropertyID%<br />
-                            Agents | OwnerID = %Owners.OwnerID%
+                            Documents | PropertyID = %Properties.PropertyID%
                         </div>
                     </div>
 
                     <textarea name="Relationships" id="relationships" class="relationship-input"
-                          placeholder="Properties | string.Empty&#10;Owners | PropertyID = %Properties.PropertyID%&#10;Transactions | PropertyID = %Properties.PropertyID%&#10;Agents | OwnerID = %Owners.OwnerID%"
-                          style="font-family: 'Consolas', 'Courier New', monospace; font-size: 13px; line-height: 1.6;"></textarea>
+                          style="font-family: 'Consolas', 'Courier New', monospace; font-size: 13px; line-height: 1.6;"> Properties | string.Empty
+                            Owners | PropertyID = %Properties.PropertyID%
+                            Transactions | PropertyID = %Properties.PropertyID%
+                            Documents | PropertyID = %Properties.PropertyID%</textarea>
 
                     <div class="note-box">
                         📌 <strong>Important Rules:</strong>
@@ -1001,7 +1029,101 @@
                             <li>Use pipe <code>|</code> to separate table name and relationship</li>
                             <li>Relationship format: <code>ChildColumn = %ParentTable.ParentColumn%</code></li>
                             <li>Each child table must reference its parent table</li>
+                            <li>You can modify the above relationships based on your custom database structure</li>
                         </ul>
+                    </div>
+                </div>
+
+                <!-- WATERMARK SECTION (NEW - ADD AFTER OUTPUT FORMAT) -->
+                <div class="signature-section-wrapper" style="background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%); border-color: #7dd3fc;">
+                    <div class="section-header">
+                        <div class="section-icon" style="background: linear-gradient(135deg, #0ea5e9, #0284c7);">💧</div>
+                        <div class="section-title">Watermark Configuration (Optional)</div>
+                    </div>
+
+                    <div class="celldiv">
+                        <div class="radio-option" style="border-color: #7dd3fc;">
+                            <input type="checkbox"
+                                   id="enableWatermark"
+                                   name="enableWatermark"
+                                   value="true"
+                                   style="accent-color: #0ea5e9;"
+                                   onchange="toggleWatermarkSection()" />
+                            <input type="hidden" name="enableWatermark" value="false" />
+                            <label for="enableWatermark">💧 Enable Watermark</label>
+                        </div>
+                    </div>
+
+                    <div class="signature-section" id="watermarkSection" style="border-color: #7dd3fc;">
+                        <div class="signature-title">💧 Watermark Configuration</div>
+
+                        <div class="celldiv">
+                            <div class="file-label">📝 Watermark Type</div>
+                            <div class="output-options" style="gap: 10px;">
+                                <label class="output-option" style="border-color: #7dd3fc;">
+                                    <input type="radio" name="watermarkType" value="text" checked onchange="toggleWatermarkInput()" style="accent-color: #0ea5e9;" />
+                                    <div class="option-content">
+                                        <div class="option-title" style="font-size: 14px;">
+                                            <span>📝</span> Text Watermark
+                                        </div>
+                                        <div class="option-description" style="font-size: 12px;">
+                                            Add custom text as watermark
+                                        </div>
+                                    </div>
+                                </label>
+                                <label class="output-option" style="border-color: #7dd3fc;">
+                                    <input type="radio" name="watermarkType" value="picture" onchange="toggleWatermarkInput()" style="accent-color: #0ea5e9;" />
+                                    <div class="option-content">
+                                        <div class="option-title" style="font-size: 14px;">
+                                            <span>🖼️</span> Picture Watermark
+                                        </div>
+                                        <div class="option-description" style="font-size: 12px;">
+                                            Upload image as watermark
+                                        </div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- TEXT WATERMARK INPUT -->
+                        <div class="celldiv" id="textWatermarkSection">
+                            <div class="file-label">✏️ Watermark Text</div>
+                            <input type="text"
+                                   name="watermarkText"
+                                   id="watermarkText"
+                                   class="text-input"
+                                   style="border-color: #7dd3fc;"
+                                   placeholder="e.g., CONFIDENTIAL, DRAFT, Company Name"
+                                   value="CONFIDENTIAL" />
+                            <div class="helper-text">
+                                💡 Enter the text you want to display as a watermark on your document. Common examples: "CONFIDENTIAL", "DRAFT", "Company Name"
+                            </div>
+                        </div>
+
+                        <!-- PICTURE WATERMARK INPUT -->
+                        <div class="celldiv" id="pictureWatermarkSection" style="display: none;">
+                            <div class="file-label">🖼️ Watermark Image File</div>
+                            <div class="custom-file-wrapper">
+                                <label class="custom-file-btn" for="watermarkImage" style="background: linear-gradient(135deg, #0ea5e9, #0284c7);">Choose File</label>
+                                <input type="file" id="watermarkImage" name="watermarkImage"
+                                       accept=".png,.jpg,.jpeg,.gif,.bmp"
+                                       onchange="updateFileName(this, 'watermarkImageName')" />
+                                <span class="custom-file-name" id="watermarkImageName">No file chosen</span>
+                            </div>
+                            <div class="helper-text">
+                                💡 Upload an image to use as a watermark (PNG, JPG, etc.). Transparent PNG images work best for watermarks.
+                            </div>
+                        </div>
+
+                        <div class="note-box">
+                            📌 <strong>Watermark Guidelines:</strong>
+                            <ul style="margin: 8px 0 0 20px; padding: 0;">
+                                <li><strong>Text Watermark:</strong> Will be displayed diagonally across the page</li>
+                                <li><strong>Picture Watermark:</strong> Image will be scaled and positioned appropriately</li>
+                                <li>Watermark appears on all pages of the document</li>
+                                <li>Watermark is semi-transparent to maintain document readability</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
 
@@ -1188,14 +1310,8 @@
         }
     }
 
-        function removeFile(type) {
-        let inputName;
-        if (type === 'template') {
-            inputName = 'TemplateFile';  // Changed from 'file'
-        } else if (type === 'database') {
-            inputName = 'DatabaseFile';  // Changed from 'databaseFile'
-        }
-
+    function removeFile(type) {
+        const inputName = type === 'template' ? 'TemplateFile' : 'DatabaseFile';
         const input = document.querySelector('input[name="' + inputName + '"]');
         const card = document.getElementById(type + '-card');
         const defaultDisplay = document.getElementById('default-' + type);
@@ -1215,10 +1331,53 @@
             signatureSection.style.display = 'block';
         } else {
             signatureSection.style.display = 'none';
-            // Reset signature fields when disabled
             document.getElementById('signatureImage').value = '';
             document.getElementById('signatureImageName').textContent = 'Signature.png';
-            document.getElementById('signatureKeywords').value = 'Sign, WITNESS, AuthorizedSign, Signature';
+            document.getElementById('signatureKeywords').value = 'SellerSign, Signature';
+        }
+    }
+    function handleFileSelect(input, type) {
+        const card = document.getElementById(type + '-card');
+        const defaultDisplay = document.getElementById('default-' + type);
+        const selectedDisplay = document.getElementById('selected-' + type);
+        const filenameElement = document.getElementById(type + '-filename');
+
+        if (input.files && input.files[0]) {
+            filenameElement.textContent = input.files[0].name;
+            defaultDisplay.style.display = 'none';
+            selectedDisplay.classList.add('show');
+            card.classList.add('has-file');
+        } else {
+            defaultDisplay.style.display = 'inline-flex';
+            selectedDisplay.classList.remove('show');
+            card.classList.remove('has-file');
+        }
+    }
+
+    function removeFile(type) {
+        const inputName = type === 'template' ? 'TemplateFile' : 'DatabaseFile';
+        const input = document.querySelector('input[name="' + inputName + '"]');
+        const card = document.getElementById(type + '-card');
+        const defaultDisplay = document.getElementById('default-' + type);
+        const selectedDisplay = document.getElementById('selected-' + type);
+
+        input.value = '';
+        defaultDisplay.style.display = 'inline-flex';
+        selectedDisplay.classList.remove('show');
+        card.classList.remove('has-file');
+    }
+
+    function toggleSignatureSection() {
+        const checkbox = document.getElementById('enableDigitalSign');
+        const signatureSection = document.getElementById('signatureSection');
+
+        if (checkbox.checked) {
+            signatureSection.style.display = 'block';
+        } else {
+            signatureSection.style.display = 'none';
+            document.getElementById('signatureImage').value = '';
+            document.getElementById('signatureImageName').textContent = 'Signature.png';
+            document.getElementById('signatureKeywords').value = 'SellerSign, Signature';
         }
     }
 
@@ -1227,12 +1386,44 @@
         if (input.files && input.files[0]) {
             displayElement.textContent = input.files[0].name;
         } else {
-            displayElement.textContent = 'Signature.png';
+            displayElement.textContent = displayId === 'signatureImageName' ? 'Signature.png' : 'No file chosen';
         }
     }
 
-       document.querySelector('form').addEventListener('submit', function(e) {
-        // Backend will load default files if none are provided
-        console.log('Form submitted - backend will handle default file loading');
-    });
+    // NEW WATERMARK FUNCTIONS
+    function toggleWatermarkSection() {
+        const checkbox = document.getElementById('enableWatermark');
+        const watermarkSection = document.getElementById('watermarkSection');
+
+        if (checkbox.checked) {
+            watermarkSection.style.display = 'block';
+        } else {
+            watermarkSection.style.display = 'none';
+            // Reset values
+            document.querySelector('input[name="watermarkType"][value="text"]').checked = true;
+            document.getElementById('watermarkText').value = 'CONFIDENTIAL';
+            document.getElementById('watermarkImage').value = '';
+            document.getElementById('watermarkImageName').textContent = 'No file chosen';
+            toggleWatermarkInput(); // Reset visibility
+        }
+    }
+
+    function toggleWatermarkInput() {
+        const textRadio = document.querySelector('input[name="watermarkType"][value="text"]');
+        const textSection = document.getElementById('textWatermarkSection');
+        const pictureSection = document.getElementById('pictureWatermarkSection');
+
+        if (textRadio.checked) {
+            textSection.style.display = 'block';
+            pictureSection.style.display = 'none';
+        } else {
+            textSection.style.display = 'none';
+            pictureSection.style.display = 'block';
+        }
+    }
+
+    function updateFileName(input, displayId) {
+        const displayElement = document.getElementById(displayId);
+        displayElement.textContent = (input.files && input.files[0]) ? input.files[0].name : 'Signature.png';
+    }
 </script>

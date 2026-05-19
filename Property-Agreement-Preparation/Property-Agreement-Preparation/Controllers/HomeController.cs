@@ -66,13 +66,15 @@ namespace Property_Agreement_Preparation.Controllers
                 }
 
                 // Step 4: Parse relationship commands from user input
-                ArrayList commands = ParseRelationships(model.Relationships, model);
+                ArrayList commands = ParseRelationships(model.Relationships);
 
                 // Step 5: Perform mail merge
                 using (WordDocument document = new WordDocument(wordStream, FormatType.Automatic))
                 {
 
                     ExecuteMailMerge(document,dataSet,commands);
+                    //Step 6: Add Watermark to document
+                    AddWatermarkToDocument(document,model);
                     // Step 6: Generate output based on selected format
                     return GenerateOutput(document, model);
                 }
@@ -89,12 +91,6 @@ namespace Property_Agreement_Preparation.Controllers
         /// </summary>
         public void ExecuteMailMerge(WordDocument document, DataSet dataSet, ArrayList commands)
         {
-            if (dataSet.Tables.Count == 0)
-            {
-                _logger.LogWarning("No tables in DataSet");
-                return;
-            }
-
             try
             {
                 document.MailMerge.StartAtNewPage = true;
@@ -511,27 +507,13 @@ namespace Property_Agreement_Preparation.Controllers
         /// Customers | EmployeeID = %Employees.EmployeeID%
         /// Orders | CustomerID = %Customers.CustomerID%
         /// </summary>
-        private ArrayList ParseRelationships(string relationships, AgreementGenerationViewModel model)
+        private ArrayList ParseRelationships(string relationships)
         {
             ArrayList commands = new ArrayList();
 
             if (string.IsNullOrWhiteSpace(relationships))
             {
                 _logger.LogWarning("No relationships provided.");
-                bool isDefaultData = model.TemplateFile == null && model.DatabaseFile == null;
-                // If default template + DB → build default commands
-                if (isDefaultData)
-                {
-                    _logger.LogInformation("Using default relationship configuration.");
-
-                    // 🔹 Add your default mapping here
-                    // Example (adjust based on your database structure)                 
-                    commands.Add(new DictionaryEntry("PropertyDetails", string.Empty));
-                    commands.Add(new DictionaryEntry("ScheduledPayments", "AgreementNumber = %PropertyDetails.AgreementNumber%"));
-
-                    return commands;
-                }
-
                 return null;
             }
 
@@ -809,9 +791,121 @@ namespace Property_Agreement_Preparation.Controllers
             _logger.LogWarning($"Default signature image not found at: {defaultImagePath}");
             return null;
         }
+        /// <summary>
+        /// Adds watermark to Word document based on user configuration
+        /// Supports both text and picture watermarks
+        /// </summary>
+        private void AddWatermarkToDocument(WordDocument document, AgreementGenerationViewModel model)
+        {
+            try
+            {
+                // Early exit if watermark is not enabled
+                if (!model.EnableWatermark)
+                {
+                    _logger.LogInformation("Watermark is not enabled.");
+                    return;
+                }
 
+                string watermarkType = model.WatermarkType?.ToLower() ?? "text";
 
+                if (watermarkType == "text")
+                {
+                    // TEXT WATERMARK
+                    string watermarkText = string.IsNullOrWhiteSpace(model.WatermarkText)
+                        ? "CONFIDENTIAL"
+                        : model.WatermarkText;
 
+                    _logger.LogInformation($"Adding text watermark: {watermarkText}");
+
+                    // Create text watermark with constructor parameters (text, fontName, width, height)
+                    TextWatermark textWatermark = new TextWatermark(watermarkText, "Arial", 250, 100);
+
+                    // Set additional properties
+                    textWatermark.Size = 72;
+                    textWatermark.Color = Syncfusion.Drawing.Color.LightGray;
+                    textWatermark.Layout = WatermarkLayout.Diagonal;
+
+                    // Apply text watermark to document
+                    document.Watermark = textWatermark;
+
+                    _logger.LogInformation("Text watermark applied successfully.");
+                }
+                else if (watermarkType == "picture")
+                {
+                    // PICTURE WATERMARK
+                    byte[] watermarkImageBytes = GetWatermarkImageBytes(model.WatermarkImage);
+
+                    if (watermarkImageBytes == null || watermarkImageBytes.Length == 0)
+                    {
+                        _logger.LogWarning("Picture watermark enabled but no image found. Skipping watermark.");
+                        return;
+                    }
+
+                    _logger.LogInformation("Adding picture watermark.");
+
+                    // Create picture watermark
+                    PictureWatermark pictureWatermark = new PictureWatermark();
+
+                    // Load picture from byte array (CORRECT METHOD)
+                    pictureWatermark.LoadPicture(watermarkImageBytes);
+
+                    // Set watermark properties
+                    pictureWatermark.Scaling = 100f; // 100% scaling
+                    pictureWatermark.Washout = true; // Make it semi-transparent
+
+                    // Apply picture watermark to document
+                    document.Watermark = pictureWatermark;
+
+                    _logger.LogInformation("Picture watermark applied successfully.");
+                }
+                else
+                {
+                    _logger.LogWarning($"Unknown watermark type: {watermarkType}");
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error adding watermark to document");
+                // Don't throw - continue processing without watermark
+            }
+        }
+
+        /// <summary>
+        /// Gets watermark image as byte array from user upload or default watermark
+        /// </summary>
+        private byte[] GetWatermarkImageBytes(IFormFile watermarkImage)
+        {
+            try
+            {
+                // If user provided an image, convert to byte array
+                if (watermarkImage != null && watermarkImage.Length > 0)
+                {
+                    _logger.LogInformation("Using user-provided watermark image.");
+                    using (MemoryStream memoryStream = new MemoryStream())
+                    {
+                        watermarkImage.OpenReadStream().CopyTo(memoryStream);
+                        return memoryStream.ToArray();
+                    }
+                }
+
+                // No user image - optionally use default watermark from project
+                string defaultImagePath = Path.Combine(_hostingEnvironment.ContentRootPath, "Watermark.png");
+
+                if (System.IO.File.Exists(defaultImagePath))
+                {
+                    _logger.LogInformation($"Using default watermark image from: {defaultImagePath}");
+                    return System.IO.File.ReadAllBytes(defaultImagePath);
+                }
+
+                _logger.LogWarning("No watermark image provided or found.");
+                return null;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error loading watermark image");
+                return null;
+            }
+        }
         public IActionResult Privacy()
         {
             return View();

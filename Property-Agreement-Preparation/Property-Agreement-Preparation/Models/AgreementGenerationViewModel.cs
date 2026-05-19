@@ -65,5 +65,11 @@ namespace Property_Agreement_Preparation.Models
         [Display(Name = "Signature Keywords")]
         public string? SignatureKeywords { get; set; } = "SellerSign, Signature";
 
+        // Watermark Properties
+        public bool EnableWatermark { get; set; }
+        public string WatermarkType { get; set; } // "text" or "picture"
+        public string WatermarkText { get; set; }
+        public IFormFile WatermarkImage { get; set; }
+
     }
 }
