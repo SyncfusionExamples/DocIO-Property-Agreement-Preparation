@@ -145,41 +145,64 @@
     .steps-indicator {
         display: flex;
         justify-content: space-between;
-        gap: 20px;
-        margin-bottom: 25px;
+        align-items: center;
+        margin-bottom: 40px;
+        padding: 30px 60px;
+        background: #f8fafc;
+        border-radius: 12px;
+        position: relative;
     }
 
+        .steps-indicator::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 100px;
+            right: 100px;
+            height: 2px;
+            background: #e2e8f0;
+            z-index: 0;
+        }
+
     .step-item {
-        flex: 1;
         display: flex;
+        flex-direction: column;
         align-items: center;
-        gap: 12px;
+        gap: 10px;
+        position: relative;
+        z-index: 1;
     }
 
     .step-number {
-        width: 40px;
-        height: 40px;
-        background: rgba(255, 255, 255, 0.2);
-        border: 2px solid rgba(255, 255, 255, 0.5);
+        width: 50px;
+        height: 50px;
         border-radius: 50%;
+        background: white;
+        border: 3px solid #cbd5e1;
         display: flex;
         align-items: center;
         justify-content: center;
         font-weight: 700;
-        font-size: 16px;
-        flex-shrink: 0;
+        font-size: 18px;
+        color: #94a3b8;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
     }
 
     .step-item.active .step-number {
-        background: white;
-        color: #667eea;
-        border-color: white;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        border-color: #667eea;
+        color: white;
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
     }
 
     .step-text {
         font-size: 14px;
         font-weight: 600;
-        opacity: 0.9;
+        color: #64748b;
+    }
+
+    .step-item.active .step-text {
+        color: #667eea;
     }
 
     /* FILE UPLOAD GRID & CARD STYLES */
@@ -880,106 +903,95 @@
 {
     @Html.AntiForgeryToken()
 
+    <!-- HERO SECTION - KEEP THIS -->
     <div class="hero-section">
         <div class="hero-badge">
-            <span>🏘️</span> PropertyDoc AI-Powered Platform
+            <span>🏠</span> Property Agreement Generator
         </div>
-        <h1 class="hero-title">Property Agreement Generator</h1>
-        <p class="hero-subtitle">
-            Transform your legal templates and property database into professional agreements instantly.
-            Powered by Syncfusion DocIO and Access Database integration.
-        </p>
+        <h1 class="hero-title">Generate Professional Property Agreements</h1>
+        <p class="hero-subtitle">Automated document generation with mail merge capabilities</p>
         <div class="hero-stats">
             <div class="stat-item">
-                <span class="stat-number">⚡</span>
-                <span class="stat-label">Auto Mail Merge</span>
+                <div style="font-size: 32px; font-weight: bold; color: white;">📄</div>
+                <div style="font-size: 14px; color: rgba(255,255,255,0.9);">Smart Templates</div>
             </div>
             <div class="stat-item">
-                <span class="stat-number">📝</span>
-                <span class="stat-label">Digital Signatures</span>
+                <div style="font-size: 32px; font-weight: bold; color: white;">⚡</div>
+                <div style="font-size: 14px; color: rgba(255,255,255,0.9);">Fast Generation</div>
             </div>
             <div class="stat-item">
-                <span class="stat-number">🔗</span>
-                <span class="stat-label">Database Relations</span>
+                <div style="font-size: 32px; font-weight: bold; color: white;">🔐</div>
+                <div style="font-size: 14px; color: rgba(255,255,255,0.9);">Secure Process</div>
             </div>
         </div>
     </div>
 
     <div class="main-container">
         <div class="generator-card">
-
-            <div class="card-header">
-                <div class="header-content">
-                    <div class="steps-indicator">
-                        <div class="step-item active">
-                            <div class="step-number">1</div>
-                            <div class="step-text">Upload Template</div>
-                        </div>
-                        <div class="step-item active">
-                            <div class="step-number">2</div>
-                            <div class="step-text">Upload Database</div>
-                        </div>
-                        <div class="step-item active">
-                            <div class="step-number">3</div>
-                            <div class="step-text">Configure & Generate</div>
-                        </div>
+            <div class="card-body">
+                <!-- STEPS INDICATOR -->
+                <div class="steps-indicator">
+                    <div class="step-item active">
+                        <div class="step-number">1</div>
+                        <span class="step-text">Upload Files</span>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <span class="step-text">Configure</span>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <span class="step-text">Generate</span>
                     </div>
                 </div>
-            </div>
 
-            <div class="card-body">
                 <!-- FILE UPLOAD SECTION -->
                 <div class="upload-grid">
-                    <!-- TEMPLATE FILE UPLOAD - FIX THE NAME ATTRIBUTE -->
+                    <!-- Template File Upload -->
                     <div class="upload-card" id="template-card">
                         <div class="upload-icon">📄</div>
-                        <div class="upload-title">Agreement Template</div>
-                        <div class="upload-subtitle">Upload your legal document template</div>
+                        <h3 class="upload-title">Word Template</h3>
+                        <p class="upload-subtitle">Upload your agreement template</p>
                         <div class="file-formats">
-                            <span>.DOCX</span>
-                            <span>.DOC</span>
-                            <span>.MD</span>
-                            <span>.RTF</span>
-                            <span>.HTML</span>
+                            <span style="background: #dbeafe; color: #1e40af; padding: 4px 12px; border-radius: 12px; font-size: 11px; font-weight: 500;">DOCX</span>
+                            <span style="background: #dbeafe; color: #1e40af; padding: 4px 12px; border-radius: 12px; font-size: 11px; font-weight: 500;">DOC</span>
+                            <span style="background: #dbeafe; color: #1e40af; padding: 4px 12px; border-radius: 12px; font-size: 11px; font-weight: 500;">RTF</span>
+                            <span style="background: #dbeafe; color: #1e40af; padding: 4px 12px; border-radius: 12px; font-size: 11px; font-weight: 500;">MD</span>
+                            <span style="background: #dbeafe; color: #1e40af; padding: 4px 12px; border-radius: 12px; font-size: 11px; font-weight: 500;">HTML</span>
+                            <span style="background: #dbeafe; color: #1e40af; padding: 4px 12px; border-radius: 12px; font-size: 11px; font-weight: 500;">TXT</span>
                         </div>
-                        @* CHANGE: name="file" → name="TemplateFile" *@
-                        @Html.TextBox("TemplateFile", null, new { type = "file", accept = ".doc,.docx,.rtf,.dot,.dotm,.dotx,.docm,.md,.txt,.html", onchange = "handleFileSelect(this, 'template')" })
-
+                        <input type="file" name="TemplateFile" accept=".doc,.docx,.md,.rtf,.html,.txt" onchange="handleFileSelect(this, 'template')" />
                         <div class="default-file-display" id="default-template">
-                            <span class="file-icon">📑</span>
-                            <span>PropertyAgreementTemplate.docx</span>
-                            <span class="default-badge">Default</span>
+                            <span class="file-icon">📄</span>
+                            <span style="font-size: 13px; color: #6b7280;">Using default template</span>
+                            <span class="default-badge">DEFAULT</span>
                         </div>
-
                         <div class="selected-file-display" id="selected-template">
-                            <span class="check-icon">✓</span>
-                            <span id="template-filename"></span>
-                            <button type="button" class="remove-btn" onclick="removeFile('template')">×</button>
+                            <span class="file-icon">📎</span>
+                            <span style="font-size: 13px; color: #059669; font-weight: 500;" id="template-filename"></span>
+                            <button type="button" class="remove-btn" onclick="removeFile('template')">✕</button>
                         </div>
                     </div>
 
-                    <!-- DATABASE FILE UPLOAD - FIX THE NAME ATTRIBUTE -->
+                    <!-- Database File Upload -->
                     <div class="upload-card" id="database-card">
-                        <div class="upload-icon">💾</div>
-                        <div class="upload-title">Property Database</div>
-                        <div class="upload-subtitle">Upload Access database with property records</div>
+                        <div class="upload-icon">🗄️</div>
+                        <h3 class="upload-title">Access Database</h3>
+                        <p class="upload-subtitle">Upload your property data</p>
                         <div class="file-formats">
-                            <span>.MDB</span>
-                            <span>.ACCDB</span>
+                            <span style="background: #fef3c7; color: #92400e; padding: 4px 12px; border-radius: 12px; font-size: 11px; font-weight: 500;">MDB</span>
+                            <span style="background: #fef3c7; color: #92400e; padding: 4px 12px; border-radius: 12px; font-size: 11px; font-weight: 500;">ACCDB</span>
                         </div>
-                        @* CHANGE: name="databaseFile" → name="DatabaseFile" *@
-                        @Html.TextBox("DatabaseFile", null, new { type = "file", accept = ".mdb,.accdb", onchange = "handleFileSelect(this, 'database')" })
-
+                        <input type="file" name="DatabaseFile" accept=".mdb,.accdb" onchange="handleFileSelect(this, 'database')" />
                         <div class="default-file-display" id="default-database">
                             <span class="file-icon">🗄️</span>
-                            <span>PropertyDatabase.mdb</span>
-                            <span class="default-badge">Default</span>
+                            <span style="font-size: 13px; color: #6b7280;">Using default database</span>
+                            <span class="default-badge">DEFAULT</span>
                         </div>
-
                         <div class="selected-file-display" id="selected-database">
-                            <span class="check-icon">✓</span>
-                            <span id="database-filename"></span>
-                            <button type="button" class="remove-btn" onclick="removeFile('database')">×</button>
+                            <span class="file-icon">📎</span>
+                            <span style="font-size: 13px; color: #059669; font-weight: 500;" id="database-filename"></span>
+                            <button type="button" class="remove-btn" onclick="removeFile('database')">✕</button>
                         </div>
                     </div>
                 </div>
@@ -1008,18 +1020,14 @@
                             <span>📋</span> Default Template Relationship String
                         </div>
                         <div class="info-text" style="font-family: 'Consolas', monospace; color: #78350f; font-size: 13px; line-height: 1.8;">
-                            Properties | string.Empty<br />
-                            Owners | PropertyID = %Properties.PropertyID%<br />
-                            Transactions | PropertyID = %Properties.PropertyID%<br />
-                            Documents | PropertyID = %Properties.PropertyID%
+                            PropertyDetails | string.Empty<br />
+                            ScheduledPayments | AgreementNumber = %PropertyDetails.AgreementNumber%
                         </div>
                     </div>
 
                     <textarea name="Relationships" id="relationships" class="relationship-input"
-                          style="font-family: 'Consolas', 'Courier New', monospace; font-size: 13px; line-height: 1.6;"> Properties | string.Empty
-                            Owners | PropertyID = %Properties.PropertyID%
-                            Transactions | PropertyID = %Properties.PropertyID%
-                            Documents | PropertyID = %Properties.PropertyID%</textarea>
+                          style="font-family: 'Consolas', 'Courier New', monospace; font-size: 13px; line-height: 1.6;">PropertyDetails | string.Empty
+ScheduledPayments | AgreementNumber = %PropertyDetails.AgreementNumber%</textarea>
 
                     <div class="note-box">
                         📌 <strong>Important Rules:</strong>
@@ -1034,7 +1042,73 @@
                     </div>
                 </div>
 
-                <!-- WATERMARK SECTION (NEW - ADD AFTER OUTPUT FORMAT) -->
+                <!-- AGREEMENT TYPE SECTION -->
+                <div class="output-selector">
+                    <div class="section-header">
+                        <div class="section-icon" style="background: linear-gradient(135deg, #3b82f6, #2563eb);">📑</div>
+                        <div class="section-title">Agreement Type</div>
+                    </div>
+
+                    <div class="output-options">
+                        <label class="output-option" style="border-color: #93c5fd;">
+                            <input type="radio" name="AgreementType" value="single" checked style="accent-color: #3b82f6;" />
+                            <div class="option-content">
+                                <div class="option-title">
+                                    <span>📄</span> Single Agreement
+                                </div>
+                                <div class="option-description">
+                                    Generate all data in one combined document
+                                </div>
+                            </div>
+                        </label>
+                        <label class="output-option" style="border-color: #93c5fd;">
+                            <input type="radio" name="AgreementType" value="multiple" style="accent-color: #3b82f6;" />
+                            <div class="option-content">
+                                <div class="option-title">
+                                    <span>📑</span> Multiple Agreements
+                                </div>
+                                <div class="option-description">
+                                    Split into separate files (ZIP archive)
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- OUTPUT FORMAT SECTION -->
+                <div class="output-selector">
+                    <div class="section-header">
+                        <div class="section-icon" style="background: linear-gradient(135deg, #3b82f6, #2563eb);">🎯</div>
+                        <div class="section-title">Output Format</div>
+                    </div>
+
+                    <div class="output-options">
+                        <label class="output-option" style="border-color: #93c5fd;">
+                            <input type="radio" name="OutputFormat" value="docx" checked style="accent-color: #3b82f6;" />
+                            <div class="option-content">
+                                <div class="option-title">
+                                    <span>📝</span> Word Document
+                                </div>
+                                <div class="option-description">
+                                    Editable DOCX format
+                                </div>
+                            </div>
+                        </label>
+                        <label class="output-option" style="border-color: #93c5fd;">
+                            <input type="radio" name="OutputFormat" value="pdf" style="accent-color: #3b82f6;" />
+                            <div class="option-content">
+                                <div class="option-title">
+                                    <span>📄</span> PDF Document
+                                </div>
+                                <div class="option-description">
+                                    Non-editable PDF format
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- WATERMARK SECTION -->
                 <div class="signature-section-wrapper" style="background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%); border-color: #7dd3fc;">
                     <div class="section-header">
                         <div class="section-icon" style="background: linear-gradient(135deg, #0ea5e9, #0284c7);">💧</div>
@@ -1045,23 +1119,23 @@
                         <div class="radio-option" style="border-color: #7dd3fc;">
                             <input type="checkbox"
                                    id="enableWatermark"
-                                   name="enableWatermark"
+                                   name="EnableWatermark"
                                    value="true"
                                    style="accent-color: #0ea5e9;"
                                    onchange="toggleWatermarkSection()" />
-                            <input type="hidden" name="enableWatermark" value="false" />
+                            <input type="hidden" name="EnableWatermark" value="false" />
                             <label for="enableWatermark">💧 Enable Watermark</label>
                         </div>
                     </div>
 
-                    <div class="signature-section" id="watermarkSection" style="border-color: #7dd3fc;">
+                    <div class="signature-section" id="watermarkSection" style="display: none; border-color: #7dd3fc;">
                         <div class="signature-title">💧 Watermark Configuration</div>
 
                         <div class="celldiv">
                             <div class="file-label">📝 Watermark Type</div>
                             <div class="output-options" style="gap: 10px;">
                                 <label class="output-option" style="border-color: #7dd3fc;">
-                                    <input type="radio" name="watermarkType" value="text" checked onchange="toggleWatermarkInput()" style="accent-color: #0ea5e9;" />
+                                    <input type="radio" name="WatermarkType" value="text" checked onchange="toggleWatermarkInput()" style="accent-color: #0ea5e9;" />
                                     <div class="option-content">
                                         <div class="option-title" style="font-size: 14px;">
                                             <span>📝</span> Text Watermark
@@ -1072,7 +1146,7 @@
                                     </div>
                                 </label>
                                 <label class="output-option" style="border-color: #7dd3fc;">
-                                    <input type="radio" name="watermarkType" value="picture" onchange="toggleWatermarkInput()" style="accent-color: #0ea5e9;" />
+                                    <input type="radio" name="WatermarkType" value="picture" onchange="toggleWatermarkInput()" style="accent-color: #0ea5e9;" />
                                     <div class="option-content">
                                         <div class="option-title" style="font-size: 14px;">
                                             <span>🖼️</span> Picture Watermark
@@ -1089,14 +1163,14 @@
                         <div class="celldiv" id="textWatermarkSection">
                             <div class="file-label">✏️ Watermark Text</div>
                             <input type="text"
-                                   name="watermarkText"
+                                   name="WatermarkText"
                                    id="watermarkText"
                                    class="text-input"
                                    style="border-color: #7dd3fc;"
                                    placeholder="e.g., CONFIDENTIAL, DRAFT, Company Name"
                                    value="CONFIDENTIAL" />
                             <div class="helper-text">
-                                💡 Enter the text you want to display as a watermark on your document. Common examples: "CONFIDENTIAL", "DRAFT", "Company Name"
+                                💡 Enter the text you want to display as a watermark on your document
                             </div>
                         </div>
 
@@ -1105,188 +1179,116 @@
                             <div class="file-label">🖼️ Watermark Image File</div>
                             <div class="custom-file-wrapper">
                                 <label class="custom-file-btn" for="watermarkImage" style="background: linear-gradient(135deg, #0ea5e9, #0284c7);">Choose File</label>
-                                <input type="file" id="watermarkImage" name="watermarkImage"
+                                <input type="file" id="watermarkImage" name="WatermarkImage"
                                        accept=".png,.jpg,.jpeg,.gif,.bmp"
                                        onchange="updateFileName(this, 'watermarkImageName')" />
                                 <span class="custom-file-name" id="watermarkImageName">No file chosen</span>
                             </div>
                             <div class="helper-text">
-                                💡 Upload an image to use as a watermark (PNG, JPG, etc.). Transparent PNG images work best for watermarks.
+                                💡 Upload an image to use as a watermark. Transparent PNG images work best
                             </div>
                         </div>
 
                         <div class="note-box">
                             📌 <strong>Watermark Guidelines:</strong>
                             <ul style="margin: 8px 0 0 20px; padding: 0;">
-                                <li><strong>Text Watermark:</strong> Will be displayed diagonally across the page</li>
-                                <li><strong>Picture Watermark:</strong> Image will be scaled and positioned appropriately</li>
-                                <li>Watermark appears on all pages of the document</li>
-                                <li>Watermark is semi-transparent to maintain document readability</li>
+                                <li><strong>Text Watermark:</strong> Displayed diagonally across the page</li>
+                                <li><strong>Picture Watermark:</strong> Image will be scaled appropriately</li>
+                                <li>Watermark appears on all pages</li>
+                                <li>Semi-transparent to maintain readability</li>
                             </ul>
                         </div>
                     </div>
                 </div>
 
-                <!-- AGREEMENT TYPE SECTION -->
-                <div class="output-selector">
-                    <div class="section-header">
-                        <div class="section-icon">📋</div>
-                        <div class="section-title">Agreement Type</div>
-                    </div>
-                    <div class="output-options">
-                        <label class="output-option">
-                            <input type="radio" name="agreementType" value="single" checked />
-                            <div class="option-content">
-                                <div class="option-title">
-                                    <span>📄</span> Single Agreement
-                                </div>
-                                <div class="option-description">
-                                    Generate one agreement with all records combined
-                                </div>
-                            </div>
-                        </label>
-                        <label class="output-option">
-                            <input type="radio" name="agreementType" value="multiple" />
-                            <div class="option-content">
-                                <div class="option-title">
-                                    <span>📚</span> Batch Agreements
-                                </div>
-                                <div class="option-description">
-                                    Generate separate agreement for each property
-                                </div>
-                            </div>
-                        </label>
-                    </div>
-                </div>
-
-                <!-- OUTPUT FORMAT SECTION -->
-                <div class="output-selector">
-                    <div class="section-header">
-                        <div class="section-icon">📤</div>
-                        <div class="section-title">Choose Output Format</div>
-                    </div>
-                    <div class="output-options">
-                        <label class="output-option">
-                            <input type="radio" name="outputFormat" value="docx" checked />
-                            <div class="option-content">
-                                <div class="option-title">
-                                    <span>📝</span> DOCX Format
-                                </div>
-                                <div class="option-description">
-                                    Editable document for legal review and modifications
-                                </div>
-                            </div>
-                        </label>
-                        <label class="output-option">
-                            <input type="radio" name="outputFormat" value="pdf" />
-                            <div class="option-content">
-                                <div class="option-title">
-                                    <span>🔒</span> PDF Format
-                                </div>
-                                <div class="option-description">
-                                    Professional PDF document with optional digital signatures
-                                </div>
-                            </div>
-                        </label>
-                    </div>
-                </div>
-
-                <!-- DIGITAL SIGNATURE SECTION (OPTIONAL) -->
+                <!-- DIGITAL SIGNATURE SECTION - UPDATED TO USE COMMA-SEPARATED -->
                 <div class="signature-section-wrapper">
                     <div class="section-header">
                         <div class="section-icon">✍️</div>
-                        <div class="section-title">Digital Signature (Optional)</div>
+                        <div class="section-title">Digital Signature Configuration (Optional)</div>
                     </div>
 
                     <div class="celldiv">
                         <div class="radio-option">
                             <input type="checkbox"
                                    id="enableDigitalSign"
-                                   name="enableDigitalSign"
+                                   name="EnableDigitalSign"
                                    value="true"
                                    onchange="toggleSignatureSection()" />
-                            <input type="hidden" name="enableDigitalSign" value="false" />
+                            <input type="hidden" name="EnableDigitalSign" value="false" />
                             <label for="enableDigitalSign">✍️ Enable Digital Signature</label>
                         </div>
                     </div>
 
-                    <div class="signature-section" id="signatureSection">
-                        <div class="signature-title">✍️ Digital Signature Configuration</div>
+                    <div class="signature-section" id="signatureSection" style="display: none;">
+                        <div class="signature-title">✍️ Signature Configuration</div>
 
                         <div class="celldiv">
                             <div class="file-label">🖼️ Signature Image File</div>
                             <div class="custom-file-wrapper">
                                 <label class="custom-file-btn" for="signatureImage">Choose File</label>
-                                <input type="file" id="signatureImage" name="signatureImage"
-                                       accept=".png,.jpg,.jpeg,.gif,.bmp"
+                                <input type="file" id="signatureImage" name="SignatureImage"
+                                       accept=".png,.jpg,.jpeg"
                                        onchange="updateFileName(this, 'signatureImageName')" />
                                 <span class="custom-file-name" id="signatureImageName">Signature.png</span>
                             </div>
                             <div class="helper-text">
-                                💡 Upload a custom signature image (PNG, JPG, etc.). If no image is uploaded, the default signature will be placed above the specified keywords in the document.
+                                💡 Upload a transparent PNG image of your signature for best results
                             </div>
                         </div>
 
                         <div class="celldiv">
-                            <div class="file-label">🔍 Signature Placeholder Keywords</div>
+                            <div class="file-label">🔍 Signature Keywords (Comma-Separated)</div>
                             <input type="text"
-                                   name="signatureKeywords"
+                                   name="SignatureKeywords"
                                    id="signatureKeywords"
                                    class="text-input"
-                                   placeholder="e.g., Signature, AuthorizedSign"
+                                   placeholder="e.g., SellerSign, Signature, BuyerSign"
                                    value="SellerSign, Signature" />
                             <div class="helper-text">
-                                💡 Enter keywords separated by commas to identify where signatures should be placed in your document. Default: "Sign, WITNESS, AuthorizedSign"
+                                💡 Enter comma-separated keywords where you want to place the signature in your document
                             </div>
                         </div>
 
                         <div class="note-box">
-                            📌 <strong>Note:</strong> Digital signatures will be automatically placed <strong>above</strong> the keywords you specify in your document. If the keywords are not found in the document, the signature will not be inserted in the PDF.
+                            📌 <strong>Important:</strong> Digital signatures will only be applied to PDF format. If you select DOCX output, signatures will not be included.
                         </div>
                     </div>
                 </div>
 
-                <button class="generate-button" type="submit">
-                    <span>🚀</span>
-                    <span>Generate Property Agreement</span>
+                <!-- GENERATE BUTTON -->
+                <button type="submit" class="generate-button">
+                    <span style="font-size: 20px;">⚡</span>
+                    <span>Generate Agreement</span>
                 </button>
 
-                <div class="error-msg">@ViewBag.Message</div>
+                @if (ViewBag.Message != null)
+                {
+                    <div class="error-msg">
+                        <span style="font-size: 20px;">⚠️</span>
+                        <span>@ViewBag.Message</span>
+                    </div>
+                }
             </div>
+        </div>
 
-            <div class="features-grid">
-                <div class="feature-box">
-                    <div class="feature-icon">🔄</div>
-                    <h4>Mail Merge with Relations</h4>
-                    <p>Advanced DocIO mail merge with database relationship support</p>
-                </div>
-                <div class="feature-box">
-                    <div class="feature-icon">💾</div>
-                    <h4>Access Database</h4>
-                    <p>Direct integration with .mdb/.accdb database files</p>
-                </div>
-                <div class="feature-box">
-                    <div class="feature-icon">✍️</div>
-                    <h4>Digital Signatures</h4>
-                    <p>Optional PDF export with custom signature images</p>
-                </div>
-                <div class="feature-box">
-                    <div class="feature-icon">⚡</div>
-                    <h4>Fast Processing</h4>
-                    <p>Real-time document generation from database records</p>
-                </div>
-                <div class="feature-box">
-                    <div class="feature-icon">🔒</div>
-                    <h4>Secure</h4>
-                    <p>No data storage, instant cleanup after processing</p>
-                </div>
-                <div class="feature-box">
-                    <div class="feature-icon">📊</div>
-                    <h4>Batch Processing</h4>
-                    <p>Generate multiple agreements from database in one click</p>
-                </div>
+        <!-- FEATURES SECTION -->
+        <div class="features-grid">
+            <div class="feature-box">
+                <div style="font-size: 32px; margin-bottom: 10px;">🚀</div>
+                <h3 style="margin: 0 0 8px 0; font-size: 16px; color: #1f2937;">Fast Processing</h3>
+                <p style="margin: 0; font-size: 13px; color: #6b7280;">Generate documents in seconds with our optimized engine</p>
             </div>
-
+            <div class="feature-box">
+                <div style="font-size: 32px; margin-bottom: 10px;">🔒</div>
+                <h3 style="margin: 0 0 8px 0; font-size: 16px; color: #1f2937;">Secure & Private</h3>
+                <p style="margin: 0; font-size: 13px; color: #6b7280;">Your data is processed securely and never stored</p>
+            </div>
+            <div class="feature-box">
+                <div style="font-size: 32px; margin-bottom: 10px;">📊</div>
+                <h3 style="margin: 0 0 8px 0; font-size: 16px; color: #1f2937;">Mail Merge Support</h3>
+                <p style="margin: 0; font-size: 13px; color: #6b7280;">Complex nested relationships with parent-child data</p>
+            </div>
         </div>
     </div>
 }
@@ -1336,61 +1338,7 @@
             document.getElementById('signatureKeywords').value = 'SellerSign, Signature';
         }
     }
-    function handleFileSelect(input, type) {
-        const card = document.getElementById(type + '-card');
-        const defaultDisplay = document.getElementById('default-' + type);
-        const selectedDisplay = document.getElementById('selected-' + type);
-        const filenameElement = document.getElementById(type + '-filename');
 
-        if (input.files && input.files[0]) {
-            filenameElement.textContent = input.files[0].name;
-            defaultDisplay.style.display = 'none';
-            selectedDisplay.classList.add('show');
-            card.classList.add('has-file');
-        } else {
-            defaultDisplay.style.display = 'inline-flex';
-            selectedDisplay.classList.remove('show');
-            card.classList.remove('has-file');
-        }
-    }
-
-    function removeFile(type) {
-        const inputName = type === 'template' ? 'TemplateFile' : 'DatabaseFile';
-        const input = document.querySelector('input[name="' + inputName + '"]');
-        const card = document.getElementById(type + '-card');
-        const defaultDisplay = document.getElementById('default-' + type);
-        const selectedDisplay = document.getElementById('selected-' + type);
-
-        input.value = '';
-        defaultDisplay.style.display = 'inline-flex';
-        selectedDisplay.classList.remove('show');
-        card.classList.remove('has-file');
-    }
-
-    function toggleSignatureSection() {
-        const checkbox = document.getElementById('enableDigitalSign');
-        const signatureSection = document.getElementById('signatureSection');
-
-        if (checkbox.checked) {
-            signatureSection.style.display = 'block';
-        } else {
-            signatureSection.style.display = 'none';
-            document.getElementById('signatureImage').value = '';
-            document.getElementById('signatureImageName').textContent = 'Signature.png';
-            document.getElementById('signatureKeywords').value = 'SellerSign, Signature';
-        }
-    }
-
-    function updateFileName(input, displayId) {
-        const displayElement = document.getElementById(displayId);
-        if (input.files && input.files[0]) {
-            displayElement.textContent = input.files[0].name;
-        } else {
-            displayElement.textContent = displayId === 'signatureImageName' ? 'Signature.png' : 'No file chosen';
-        }
-    }
-
-    // NEW WATERMARK FUNCTIONS
     function toggleWatermarkSection() {
         const checkbox = document.getElementById('enableWatermark');
         const watermarkSection = document.getElementById('watermarkSection');
@@ -1400,16 +1348,16 @@
         } else {
             watermarkSection.style.display = 'none';
             // Reset values
-            document.querySelector('input[name="watermarkType"][value="text"]').checked = true;
+            document.querySelector('input[name="WatermarkType"][value="text"]').checked = true;
             document.getElementById('watermarkText').value = 'CONFIDENTIAL';
             document.getElementById('watermarkImage').value = '';
             document.getElementById('watermarkImageName').textContent = 'No file chosen';
-            toggleWatermarkInput(); // Reset visibility
+            toggleWatermarkInput();
         }
     }
 
     function toggleWatermarkInput() {
-        const textRadio = document.querySelector('input[name="watermarkType"][value="text"]');
+        const textRadio = document.querySelector('input[name="WatermarkType"][value="text"]');
         const textSection = document.getElementById('textWatermarkSection');
         const pictureSection = document.getElementById('pictureWatermarkSection');
 
@@ -1424,6 +1372,14 @@
 
     function updateFileName(input, displayId) {
         const displayElement = document.getElementById(displayId);
-        displayElement.textContent = (input.files && input.files[0]) ? input.files[0].name : 'Signature.png';
+        if (input.files && input.files[0]) {
+            displayElement.textContent = input.files[0].name;
+        } else {
+            if (displayId === 'signatureImageName') {
+                displayElement.textContent = 'Signature.png';
+            } else if (displayId === 'watermarkImageName') {
+                displayElement.textContent = 'No file chosen';
+            }
+        }
     }
 </script>

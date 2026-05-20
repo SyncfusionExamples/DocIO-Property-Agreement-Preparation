@@ -75,7 +75,7 @@ namespace Property_Agreement_Preparation.Controllers
                     ExecuteMailMerge(document,dataSet,commands);
                     //Step 6: Add Watermark to document
                     AddWatermarkToDocument(document,model);
-                    // Step 6: Generate output based on selected format
+                    // Step 7: Generate output based on selected format
                     return GenerateOutput(document, model);
                 }
             }
