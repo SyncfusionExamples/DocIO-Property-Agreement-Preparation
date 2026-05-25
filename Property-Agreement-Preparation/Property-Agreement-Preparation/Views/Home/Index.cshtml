@@ -1,0 +1,1375 @@
+﻿@{
+    ViewData["Title"] = "Property Agreement";
+}
+
+<style>
+    html, body {
+        margin: 0 !important;
+        padding: 0 !important;
+        min-height: 100vh;
+        position: static !important;
+    }
+
+    body {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #8b5cf6 100%);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin-bottom: 0 !important;
+    }
+
+    *, *::before, *::after {
+        box-sizing: border-box;
+    }
+
+    header nav.navbar {
+        margin-bottom: 0 !important;
+    }
+
+    /* HERO SECTION STYLES */
+    .hero-section {
+        text-align: center;
+        padding: 60px 20px 40px;
+        color: white;
+    }
+
+    .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        padding: 8px 20px;
+        border-radius: 50px;
+        font-size: 13px;
+        font-weight: 600;
+        margin-bottom: 20px;
+        animation: fadeInDown 0.6s ease;
+    }
+
+    .hero-title {
+        font-size: 48px;
+        font-weight: 800;
+        margin-bottom: 15px;
+        text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        animation: fadeInDown 0.8s ease;
+    }
+
+    .hero-subtitle {
+        font-size: 18px;
+        opacity: 0.95;
+        max-width: 600px;
+        margin: 0 auto 30px;
+        line-height: 1.6;
+        animation: fadeInUp 1s ease;
+    }
+
+    .hero-stats {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        margin-top: 30px;
+        animation: fadeInUp 1.2s ease;
+    }
+
+    .stat-item {
+        text-align: center;
+    }
+
+        .stat-item .stat-number {
+            font-size: 32px;
+            font-weight: 700;
+            display: block;
+        }
+
+        .stat-item .stat-label {
+            font-size: 13px;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+
+    /* MAIN CONTAINER & CARD STYLES */
+    .main-container {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 20px 60px;
+    }
+
+    .generator-card {
+        background: white;
+        border-radius: 24px;
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.25);
+        overflow: hidden;
+        animation: scaleIn 0.5s ease;
+    }
+
+    .card-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 30px 40px;
+        position: relative;
+        overflow: hidden;
+    }
+
+        .card-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .card-header::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -5%;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
+        }
+
+    .header-content {
+        position: relative;
+        z-index: 1;
+        color: white;
+    }
+
+    .card-body {
+        padding: 50px 40px;
+    }
+
+    /* STEPS INDICATOR STYLES */
+    .steps-indicator {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 40px;
+        padding: 30px 60px;
+        background: #f8fafc;
+        border-radius: 12px;
+        position: relative;
+    }
+
+        .steps-indicator::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 100px;
+            right: 100px;
+            height: 2px;
+            background: #e2e8f0;
+            z-index: 0;
+        }
+
+    .step-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        position: relative;
+        z-index: 1;
+    }
+
+    .step-number {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: white;
+        border: 3px solid #cbd5e1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 18px;
+        color: #94a3b8;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+    }
+
+    .step-item.active .step-number {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        border-color: #667eea;
+        color: white;
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    }
+
+    .step-text {
+        font-size: 14px;
+        font-weight: 600;
+        color: #64748b;
+    }
+
+    .step-item.active .step-text {
+        color: #667eea;
+    }
+
+    /* FILE UPLOAD GRID & CARD STYLES */
+    .upload-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+        margin-bottom: 40px;
+    }
+
+    .upload-card {
+        border: 3px dashed #cbd5e1;
+        border-radius: 16px;
+        padding: 30px 25px;
+        text-align: center;
+        background: #f8fafc;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+        .upload-card:hover {
+            border-color: #667eea;
+            background: #f5f3ff;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
+        }
+
+        .upload-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .upload-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .upload-card.has-file {
+            border-color: #667eea;
+            border-style: solid;
+            background: #f5f3ff;
+        }
+
+    .upload-icon {
+        width: 70px;
+        height: 70px;
+        margin: 0 auto 20px;
+        background: linear-gradient(135deg, #ede9fe, #ddd6fe);
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 32px;
+        transition: all 0.3s ease;
+    }
+
+    .upload-card:hover .upload-icon {
+        transform: scale(1.1) rotate(5deg);
+    }
+
+    .upload-title {
+        font-size: 16px;
+        font-weight: 700;
+        color: #0f172a;
+        margin-bottom: 8px;
+    }
+
+    .upload-subtitle {
+        font-size: 13px;
+        color: #64748b;
+        margin-bottom: 15px;
+    }
+
+    .file-formats {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 15px;
+        width: 100%;
+    }
+
+        .file-formats span {
+            background: #e2e8f0;
+            color: #475569;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+    .upload-card input[type="file"] {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    /* FILE DISPLAY STYLES (UNIFIED) */
+    .default-file-display,
+    .selected-file-display {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 16px;
+        border-radius: 10px;
+        font-size: 13px;
+        font-weight: 600;
+        margin-top: 12px;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .default-file-display {
+        background: #fff;
+        border: 2px solid #667eea;
+        color: #5b21b6;
+        box-shadow: 0 2px 8px rgba(102, 126, 234, 0.15);
+    }
+
+    .selected-file-display {
+        display: none;
+        background: #dcfce7;
+        border: 2px solid #86efac;
+        color: #166534;
+        animation: slideIn 0.3s ease;
+    }
+
+        .selected-file-display.show {
+            display: inline-flex;
+        }
+
+    .file-icon {
+        font-size: 16px;
+    }
+
+    .default-badge {
+        background: #fef3c7;
+        color: #92400e;
+        padding: 2px 8px;
+        border-radius: 6px;
+        font-size: 10px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .remove-btn {
+        margin-left: 8px;
+        background: #dc2626;
+        color: white;
+        border: none;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 12px;
+        transition: all 0.2s ease;
+    }
+
+        .remove-btn:hover {
+            background: #b91c1c;
+            transform: scale(1.1);
+        }
+
+    /* SECTION HEADER STYLES (REUSABLE) */
+    .section-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+
+    .section-icon {
+        width: 45px;
+        height: 45px;
+        background: linear-gradient(135deg, #fbbf24, #f59e0b);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+        color: white;
+    }
+
+    .section-title {
+        font-size: 18px;
+        font-weight: 700;
+        color: #0f172a;
+    }
+
+    /* SECTION WRAPPERS (UNIFIED) */
+    .relationship-section,
+    .output-selector,
+    .signature-section-wrapper {
+        border-radius: 16px;
+        padding: 30px;
+        margin-bottom: 40px;
+        border: 2px solid;
+    }
+
+    .relationship-section {
+        background: linear-gradient(135deg, #fff9e6 0%, #fef3c7 100%);
+        border-color: #fde68a;
+    }
+
+    .output-selector {
+        background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+        border-color: #93c5fd;
+    }
+
+        .output-selector .section-icon {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+        }
+
+    .signature-section-wrapper {
+        background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%);
+        border-color: #f9a8d4;
+    }
+
+        .signature-section-wrapper .section-icon {
+            background: linear-gradient(135deg, #ec4899, #db2777);
+        }
+
+    /* INFO BOX STYLES */
+    .info-box {
+        background: white;
+        border: 2px solid;
+        border-radius: 12px;
+        padding: 15px 20px;
+        margin-bottom: 20px;
+    }
+
+    .relationship-section .info-box {
+        border-color: #fde68a;
+    }
+
+    .info-box .info-title {
+        font-size: 14px;
+        font-weight: 700;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .relationship-section .info-box .info-title {
+        color: #92400e;
+    }
+
+    .info-box .info-text {
+        font-size: 13px;
+        color: #64748b;
+        line-height: 1.6;
+    }
+
+    .info-text code {
+        background: #fde68a;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-family: 'Consolas', 'Courier New', monospace;
+        font-size: 12px;
+        color: #92400e;
+    }
+
+    /* INPUT STYLES (UNIFIED) */
+    .relationship-input,
+    .text-input {
+        width: 100%;
+        padding: 12px 15px;
+        border: 2px solid;
+        border-radius: 10px;
+        font-size: 14px;
+        transition: all 0.3s ease;
+    }
+
+    .relationship-input {
+        border-color: #fde68a;
+        font-family: 'Consolas', 'Courier New', monospace;
+        min-height: 120px;
+        resize: vertical;
+    }
+
+    .text-input {
+        border-color: #f9a8d4;
+    }
+
+        .relationship-input:focus,
+        .text-input:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
+        }
+
+    .relationship-input:focus {
+        border-color: #f59e0b;
+    }
+
+    .text-input:focus {
+        border-color: #ec4899;
+        box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.1);
+    }
+
+    .relationship-input::placeholder,
+    .text-input::placeholder {
+        color: #94a3b8;
+        font-size: 13px;
+    }
+
+    /* OUTPUT OPTIONS STYLES */
+    .output-options {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+    }
+
+    .output-option {
+        background: white;
+        border: 2px solid #93c5fd;
+        border-radius: 12px;
+        padding: 20px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+        .output-option:hover {
+            border-color: #3b82f6;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.15);
+        }
+
+        .output-option input[type="radio"] {
+            margin-top: 3px;
+            width: 20px;
+            height: 20px;
+            accent-color: #3b82f6;
+            cursor: pointer;
+        }
+
+        .output-option:has(input:checked) {
+            border-color: #3b82f6;
+            background: #eff6ff;
+        }
+
+    .option-content {
+        flex: 1;
+    }
+
+    .option-title {
+        font-size: 15px;
+        font-weight: 700;
+        color: #0f172a;
+        margin-bottom: 5px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .option-description {
+        font-size: 13px;
+        color: #64748b;
+        line-height: 1.5;
+    }
+
+    /* DIGITAL SIGNATURE STYLES */
+    .celldiv {
+        margin: 20px 0;
+    }
+
+    .radio-option {
+        display: flex;
+        align-items: center;
+        background: white;
+        padding: 15px 20px;
+        border-radius: 12px;
+        border: 2px solid #f9a8d4;
+        transition: all 0.3s ease;
+    }
+
+        .radio-option:hover {
+            border-color: #ec4899;
+            transform: translateX(5px);
+        }
+
+        .radio-option input[type="checkbox"] {
+            width: 22px;
+            height: 22px;
+            margin-right: 12px;
+            cursor: pointer;
+            accent-color: #ec4899;
+        }
+
+        .radio-option label {
+            cursor: pointer;
+            color: #0f172a;
+            font-size: 16px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+    .signature-section {
+        display: none;
+        margin-top: 20px;
+        padding: 25px;
+        background: white;
+        border-radius: 12px;
+        border: 2px solid #f9a8d4;
+        animation: slideDown 0.3s ease;
+    }
+
+    .signature-title {
+        font-size: 16px;
+        font-weight: 700;
+        color: #0f172a;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        border-bottom: 2px solid #fce7f3;
+    }
+
+    .file-label {
+        font-size: 14px;
+        font-weight: 700;
+        color: #0f172a;
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    .custom-file-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 10px;
+    }
+
+    .custom-file-btn {
+        background: linear-gradient(135deg, #ec4899, #db2777);
+        color: white;
+        padding: 10px 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 14px;
+        transition: all 0.3s ease;
+        display: inline-block;
+    }
+
+        .custom-file-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(236, 72, 153, 0.3);
+        }
+
+    .custom-file-wrapper input[type="file"] {
+        display: none;
+    }
+
+    .custom-file-name {
+        font-size: 14px;
+        color: #64748b;
+        font-style: italic;
+    }
+
+    .helper-text {
+        font-size: 12px;
+        color: #64748b;
+        margin-top: 8px;
+        line-height: 1.5;
+    }
+
+    .note-box {
+        background: #fff9e6;
+        padding: 15px 18px;
+        border-left: 4px solid #fbbf24;
+        margin-top: 15px;
+        border-radius: 8px;
+        font-size: 13px;
+        color: #78350f;
+        line-height: 1.6;
+    }
+
+        .note-box strong {
+            color: #92400e;
+        }
+
+        .note-box ul {
+            list-style-type: disc;
+            margin: 8px 0 0 20px;
+            padding: 0;
+        }
+
+            .note-box ul li {
+                margin-bottom: 4px;
+            }
+
+    /* BUTTON STYLES */
+    .generate-button {
+        width: 100%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        padding: 18px;
+        font-size: 16px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+    }
+
+        .generate-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+        }
+
+        .generate-button:active {
+            transform: translateY(0);
+        }
+
+    .error-msg {
+        margin-top: 20px;
+        padding: 15px 20px;
+        background: #fef2f2;
+        border: 2px solid #fecaca;
+        border-radius: 12px;
+        color: #dc2626;
+        font-size: 14px;
+        font-weight: 600;
+        display: none;
+        animation: shake 0.5s ease;
+    }
+
+        .error-msg:not(:empty) {
+            display: block;
+        }
+
+    /* FEATURES GRID */
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        padding: 40px;
+        background: #f8fafc;
+    }
+
+    .feature-box {
+        text-align: center;
+        padding: 20px;
+    }
+
+        .feature-box .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #ede9fe, #ddd6fe);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin: 0 auto 12px;
+        }
+
+        .feature-box h4 {
+            font-size: 14px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 6px;
+        }
+
+        .feature-box p {
+            font-size: 12px;
+            color: #64748b;
+            line-height: 1.5;
+        }
+
+    /* ANIMATIONS */
+    @@keyframes fadeInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @@keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @@keyframes scaleIn {
+        from {
+            opacity: 0;
+            transform: scale(0.95);
+        }
+
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    @@keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @@keyframes slideDown {
+        from {
+            opacity: 0;
+            max-height: 0;
+            transform: translateY(-20px);
+        }
+
+        to {
+            opacity: 1;
+            max-height: 1000px;
+            transform: translateY(0);
+        }
+    }
+
+    @@keyframes shake {
+        0%, 100% {
+            transform: translateX(0);
+        }
+
+        10%, 30%, 50%, 70%, 90% {
+            transform: translateX(-5px);
+        }
+
+        20%, 40%, 60%, 80% {
+            transform: translateX(5px);
+        }
+    }
+
+    @@media (max-width: 768px) {
+        .hero-title {
+            font-size: 32px;
+        }
+
+        .upload-grid,
+        .output-options,
+        .features-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .hero-stats {
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .card-body {
+            padding: 30px 20px;
+        }
+
+        .steps-indicator {
+            flex-direction: column;
+        }
+    }
+</style>
+
+@using (Html.BeginForm("GenerateAgreement", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <!-- HERO SECTION - KEEP THIS -->
+    <div class="hero-section">
+        <div class="hero-badge">
+            <span>🏠</span> Property Agreement Generator
+        </div>
+        <h1 class="hero-title">Generate Professional Property Agreements</h1>
+        <p class="hero-subtitle">Automated document generation with mail merge capabilities</p>
+        <div class="hero-stats">
+            <div class="stat-item">
+                <div style="font-size: 32px; font-weight: bold; color: white;">📄</div>
+                <div style="font-size: 14px; color: rgba(255,255,255,0.9);">Smart Templates</div>
+            </div>
+            <div class="stat-item">
+                <div style="font-size: 32px; font-weight: bold; color: white;">⚡</div>
+                <div style="font-size: 14px; color: rgba(255,255,255,0.9);">Fast Generation</div>
+            </div>
+            <div class="stat-item">
+                <div style="font-size: 32px; font-weight: bold; color: white;">🔐</div>
+                <div style="font-size: 14px; color: rgba(255,255,255,0.9);">Secure Process</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="generator-card">
+            <div class="card-body">
+                <!-- STEPS INDICATOR -->
+                <div class="steps-indicator">
+                    <div class="step-item active">
+                        <div class="step-number">1</div>
+                        <span class="step-text">Upload Files</span>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <span class="step-text">Configure</span>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <span class="step-text">Generate</span>
+                    </div>
+                </div>
+
+                <!-- FILE UPLOAD SECTION -->
+                <div class="upload-grid">
+                    <!-- Template File Upload -->
+                    <div class="upload-card" id="template-card">
+                        <div class="upload-icon">📄</div>
+                        <h3 class="upload-title">Word Template</h3>
+                        <p class="upload-subtitle">Upload your agreement template</p>
+                        <div class="file-formats">
+                            <span style="background: #dbeafe; color: #1e40af; padding: 4px 12px; border-radius: 12px; font-size: 11px; font-weight: 500;">DOCX</span>
+                            <span style="background: #dbeafe; color: #1e40af; padding: 4px 12px; border-radius: 12px; font-size: 11px; font-weight: 500;">DOC</span>
+                            <span style="background: #dbeafe; color: #1e40af; padding: 4px 12px; border-radius: 12px; font-size: 11px; font-weight: 500;">RTF</span>
+                            <span style="background: #dbeafe; color: #1e40af; padding: 4px 12px; border-radius: 12px; font-size: 11px; font-weight: 500;">MD</span>
+                            <span style="background: #dbeafe; color: #1e40af; padding: 4px 12px; border-radius: 12px; font-size: 11px; font-weight: 500;">HTML</span>
+                            <span style="background: #dbeafe; color: #1e40af; padding: 4px 12px; border-radius: 12px; font-size: 11px; font-weight: 500;">TXT</span>
+                        </div>
+                        <input type="file" name="TemplateFile" accept=".doc,.docx,.md,.rtf,.html,.txt" onchange="handleFileSelect(this, 'template')" />
+                        <div class="default-file-display" id="default-template">
+                            <span class="file-icon">📄</span>
+                            <span style="font-size: 13px; color: #6b7280;">Using default template</span>
+                            <span class="default-badge">DEFAULT</span>
+                        </div>
+                        <div class="selected-file-display" id="selected-template">
+                            <span class="file-icon">📎</span>
+                            <span style="font-size: 13px; color: #059669; font-weight: 500;" id="template-filename"></span>
+                            <button type="button" class="remove-btn" onclick="removeFile('template')">✕</button>
+                        </div>
+                    </div>
+
+                    <!-- Database File Upload -->
+                    <div class="upload-card" id="database-card">
+                        <div class="upload-icon">🗄️</div>
+                        <h3 class="upload-title">Access Database</h3>
+                        <p class="upload-subtitle">Upload your property data</p>
+                        <div class="file-formats">
+                            <span style="background: #fef3c7; color: #92400e; padding: 4px 12px; border-radius: 12px; font-size: 11px; font-weight: 500;">MDB</span>
+                            <span style="background: #fef3c7; color: #92400e; padding: 4px 12px; border-radius: 12px; font-size: 11px; font-weight: 500;">ACCDB</span>
+                        </div>
+                        <input type="file" name="DatabaseFile" accept=".mdb,.accdb" onchange="handleFileSelect(this, 'database')" />
+                        <div class="default-file-display" id="default-database">
+                            <span class="file-icon">🗄️</span>
+                            <span style="font-size: 13px; color: #6b7280;">Using default database</span>
+                            <span class="default-badge">DEFAULT</span>
+                        </div>
+                        <div class="selected-file-display" id="selected-database">
+                            <span class="file-icon">📎</span>
+                            <span style="font-size: 13px; color: #059669; font-weight: 500;" id="database-filename"></span>
+                            <button type="button" class="remove-btn" onclick="removeFile('database')">✕</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DATABASE RELATIONSHIP SECTION -->
+                <div class="relationship-section">
+                    <div class="section-header">
+                        <div class="section-icon">🔗</div>
+                        <div class="section-title">Database Relationship Configuration</div>
+                    </div>
+
+                    <div class="info-box">
+                        <div class="info-title">
+                            <span>💡</span> How to Configure (One Per Line)
+                        </div>
+                        <div class="info-text">
+                            <strong>Format:</strong> <code>TableName | Relationship</code><br />
+                            <strong>Parent Table:</strong> Use <code>string.Empty</code> for the first table<br />
+                            <strong>Child Tables:</strong> Use format <code>ChildColumn = %ParentTable.ParentColumn%</code><br />
+                            <strong>📌 Note:</strong> For the default template, use the relationship string provided below. If using a custom template, modify the relationships according to your database structure.
+                        </div>
+                    </div>
+
+                    <textarea name="Relationships" id="relationships" class="relationship-input"
+                          style="font-family: 'Consolas', 'Courier New', monospace; font-size: 13px; line-height: 1.6;">PropertyDetails | string.Empty
+ScheduledPayments | AgreementNumber = %PropertyDetails.AgreementNumber%</textarea>
+
+                    <div class="note-box">
+                        📌 <strong>Important Rules:</strong>
+                        <ul style="margin: 8px 0 0 20px; padding: 0;">
+                            <li><strong>One command per line</strong></li>
+                            <li>First line is the <strong>parent table</strong> with <code>string.Empty</code></li>
+                            <li>Use pipe <code>|</code> to separate table name and relationship</li>
+                            <li>Relationship format: <code>ChildColumn = %ParentTable.ParentColumn%</code></li>
+                            <li>Each child table must reference its parent table</li>
+                            <li>You can modify the above relationships based on your custom database structure</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- AGREEMENT TYPE SECTION -->
+                <div class="output-selector">
+                    <div class="section-header">
+                        <div class="section-icon" style="background: linear-gradient(135deg, #3b82f6, #2563eb);">📑</div>
+                        <div class="section-title">Agreement Type</div>
+                    </div>
+
+                    <div class="output-options">
+                        <label class="output-option" style="border-color: #93c5fd;">
+                            <input type="radio" name="AgreementType" value="single" checked style="accent-color: #3b82f6;" />
+                            <div class="option-content">
+                                <div class="option-title">
+                                    <span>📄</span> Single Agreement
+                                </div>
+                                <div class="option-description">
+                                    Generate all data in one combined document
+                                </div>
+                            </div>
+                        </label>
+                        <label class="output-option" style="border-color: #93c5fd;">
+                            <input type="radio" name="AgreementType" value="multiple" style="accent-color: #3b82f6;" />
+                            <div class="option-content">
+                                <div class="option-title">
+                                    <span>📑</span> Multiple Agreements
+                                </div>
+                                <div class="option-description">
+                                    Split into separate files (ZIP archive)
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- OUTPUT FORMAT SECTION -->
+                <div class="output-selector">
+                    <div class="section-header">
+                        <div class="section-icon" style="background: linear-gradient(135deg, #3b82f6, #2563eb);">🎯</div>
+                        <div class="section-title">Output Format</div>
+                    </div>
+
+                    <div class="output-options">
+                        <label class="output-option" style="border-color: #93c5fd;">
+                            <input type="radio" name="OutputFormat" value="docx" checked style="accent-color: #3b82f6;" />
+                            <div class="option-content">
+                                <div class="option-title">
+                                    <span>📝</span> Word Document
+                                </div>
+                                <div class="option-description">
+                                    Editable DOCX format
+                                </div>
+                            </div>
+                        </label>
+                        <label class="output-option" style="border-color: #93c5fd;">
+                            <input type="radio" name="OutputFormat" value="pdf" style="accent-color: #3b82f6;" />
+                            <div class="option-content">
+                                <div class="option-title">
+                                    <span>📄</span> PDF Document
+                                </div>
+                                <div class="option-description">
+                                    Non-editable PDF format
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- WATERMARK SECTION -->
+                <div class="signature-section-wrapper" style="background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%); border-color: #7dd3fc;">
+                    <div class="section-header">
+                        <div class="section-icon" style="background: linear-gradient(135deg, #0ea5e9, #0284c7);">💧</div>
+                        <div class="section-title">Watermark Configuration (Optional)</div>
+                    </div>
+
+                    <div class="celldiv">
+                        <div class="radio-option" style="border-color: #7dd3fc;">
+                            <input type="checkbox"
+                                   id="enableWatermark"
+                                   name="EnableWatermark"
+                                   value="true"
+                                   style="accent-color: #0ea5e9;"
+                                   onchange="toggleWatermarkSection()" />
+                            <input type="hidden" name="EnableWatermark" value="false" />
+                            <label for="enableWatermark">💧 Enable Watermark</label>
+                        </div>
+                    </div>
+
+                    <div class="signature-section" id="watermarkSection" style="display: none; border-color: #7dd3fc;">
+                        <div class="signature-title">💧 Watermark Configuration</div>
+
+                        <div class="celldiv">
+                            <div class="file-label">📝 Watermark Type</div>
+                            <div class="output-options" style="gap: 10px;">
+                                <label class="output-option" style="border-color: #7dd3fc;">
+                                    <input type="radio" name="WatermarkType" value="text" checked onchange="toggleWatermarkInput()" style="accent-color: #0ea5e9;" />
+                                    <div class="option-content">
+                                        <div class="option-title" style="font-size: 14px;">
+                                            <span>📝</span> Text Watermark
+                                        </div>
+                                        <div class="option-description" style="font-size: 12px;">
+                                            Add custom text as watermark
+                                        </div>
+                                    </div>
+                                </label>
+                                <label class="output-option" style="border-color: #7dd3fc;">
+                                    <input type="radio" name="WatermarkType" value="picture" onchange="toggleWatermarkInput()" style="accent-color: #0ea5e9;" />
+                                    <div class="option-content">
+                                        <div class="option-title" style="font-size: 14px;">
+                                            <span>🖼️</span> Picture Watermark
+                                        </div>
+                                        <div class="option-description" style="font-size: 12px;">
+                                            Upload image as watermark
+                                        </div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- TEXT WATERMARK INPUT -->
+                        <div class="celldiv" id="textWatermarkSection">
+                            <div class="file-label">✏️ Watermark Text</div>
+                            <input type="text"
+                                   name="WatermarkText"
+                                   id="watermarkText"
+                                   class="text-input"
+                                   style="border-color: #7dd3fc;"
+                                   placeholder="e.g., CONFIDENTIAL, DRAFT, Company Name"
+                                   value="CONFIDENTIAL" />
+                            <div class="helper-text">
+                                💡 Enter the text you want to display as a watermark on your document
+                            </div>
+                        </div>
+
+                        <!-- PICTURE WATERMARK INPUT -->
+                        <div class="celldiv" id="pictureWatermarkSection" style="display: none;">
+                            <div class="file-label">🖼️ Watermark Image File</div>
+                            <div class="custom-file-wrapper">
+                                <label class="custom-file-btn" for="watermarkImage" style="background: linear-gradient(135deg, #0ea5e9, #0284c7);">Choose File</label>
+                                <input type="file" id="watermarkImage" name="WatermarkImage"
+                                       accept=".png,.jpg,.jpeg,.gif,.bmp"
+                                       onchange="updateFileName(this, 'watermarkImageName')" />
+                                <span class="custom-file-name" id="watermarkImageName">No file chosen</span>
+                            </div>
+                            <div class="helper-text">
+                                💡 Upload an image to use as a watermark. Transparent PNG images work best
+                            </div>
+                        </div>
+
+                        <div class="note-box">
+                            📌 <strong>Watermark Guidelines:</strong>
+                            <ul style="margin: 8px 0 0 20px; padding: 0;">
+                                <li><strong>Text Watermark:</strong> Displayed diagonally across the page</li>
+                                <li><strong>Picture Watermark:</strong> Image will be scaled appropriately</li>
+                                <li>Watermark appears on all pages</li>
+                                <li>Semi-transparent to maintain readability</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DIGITAL SIGNATURE SECTION - UPDATED TO USE COMMA-SEPARATED -->
+                <div class="signature-section-wrapper">
+                    <div class="section-header">
+                        <div class="section-icon">✍️</div>
+                        <div class="section-title">Digital Signature Configuration (Optional)</div>
+                    </div>
+
+                    <div class="celldiv">
+                        <div class="radio-option">
+                            <input type="checkbox"
+                                   id="enableDigitalSign"
+                                   name="EnableDigitalSign"
+                                   value="true"
+                                   onchange="toggleSignatureSection()" />
+                            <input type="hidden" name="EnableDigitalSign" value="false" />
+                            <label for="enableDigitalSign">✍️ Enable Digital Signature</label>
+                        </div>
+                    </div>
+
+                    <div class="signature-section" id="signatureSection" style="display: none;">
+                        <div class="signature-title">✍️ Signature Configuration</div>
+
+                        <div class="celldiv">
+                            <div class="file-label">🖼️ Signature Image File</div>
+                            <div class="custom-file-wrapper">
+                                <label class="custom-file-btn" for="signatureImage">Choose File</label>
+                                <input type="file" id="signatureImage" name="SignatureImage"
+                                       accept=".png,.jpg,.jpeg"
+                                       onchange="updateFileName(this, 'signatureImageName')" />
+                                <span class="custom-file-name" id="signatureImageName">Signature.png</span>
+                            </div>
+                            <div class="helper-text">
+                                💡 Upload a transparent PNG image of your signature for best results
+                            </div>
+                        </div>
+
+                        <div class="celldiv">
+                            <div class="file-label">🔍 Signature Keywords (Comma-Separated)</div>
+                            <input type="text"
+                                   name="SignatureKeywords"
+                                   id="signatureKeywords"
+                                   class="text-input"
+                                   placeholder="e.g., SellerSign, Signature, BuyerSign"
+                                   value="SellerSign, Signature" />
+                            <div class="helper-text">
+                                💡 Enter comma-separated keywords where you want to place the signature in your document
+                            </div>
+                        </div>
+
+                        <div class="note-box">
+                            📌 <strong>Important:</strong> Digital signatures will only be applied to PDF format. If you select DOCX output, signatures will not be included.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GENERATE BUTTON -->
+                <button type="submit" class="generate-button">
+                    <span style="font-size: 20px;">⚡</span>
+                    <span>Generate Agreement</span>
+                </button>
+
+                @if (ViewBag.Message != null)
+                {
+                    <div class="error-msg">
+                        <span style="font-size: 20px;">⚠️</span>
+                        <span>@ViewBag.Message</span>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <!-- FEATURES SECTION -->
+        <div class="features-grid">
+            <div class="feature-box">
+                <div style="font-size: 32px; margin-bottom: 10px;">🚀</div>
+                <h3 style="margin: 0 0 8px 0; font-size: 16px; color: #1f2937;">Fast Processing</h3>
+                <p style="margin: 0; font-size: 13px; color: #6b7280;">Generate documents in seconds with our optimized engine</p>
+            </div>
+            <div class="feature-box">
+                <div style="font-size: 32px; margin-bottom: 10px;">🔒</div>
+                <h3 style="margin: 0 0 8px 0; font-size: 16px; color: #1f2937;">Secure & Private</h3>
+                <p style="margin: 0; font-size: 13px; color: #6b7280;">Your data is processed securely and never stored</p>
+            </div>
+            <div class="feature-box">
+                <div style="font-size: 32px; margin-bottom: 10px;">📊</div>
+                <h3 style="margin: 0 0 8px 0; font-size: 16px; color: #1f2937;">Mail Merge Support</h3>
+                <p style="margin: 0; font-size: 13px; color: #6b7280;">Complex nested relationships with parent-child data</p>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    function handleFileSelect(input, type) {
+        const card = document.getElementById(type + '-card');
+        const defaultDisplay = document.getElementById('default-' + type);
+        const selectedDisplay = document.getElementById('selected-' + type);
+        const filenameElement = document.getElementById(type + '-filename');
+
+        if (input.files && input.files[0]) {
+            filenameElement.textContent = input.files[0].name;
+            defaultDisplay.style.display = 'none';
+            selectedDisplay.classList.add('show');
+            card.classList.add('has-file');
+        } else {
+            defaultDisplay.style.display = 'inline-flex';
+            selectedDisplay.classList.remove('show');
+            card.classList.remove('has-file');
+        }
+    }
+
+    function removeFile(type) {
+        const inputName = type === 'template' ? 'TemplateFile' : 'DatabaseFile';
+        const input = document.querySelector('input[name="' + inputName + '"]');
+        const card = document.getElementById(type + '-card');
+        const defaultDisplay = document.getElementById('default-' + type);
+        const selectedDisplay = document.getElementById('selected-' + type);
+
+        input.value = '';
+        defaultDisplay.style.display = 'inline-flex';
+        selectedDisplay.classList.remove('show');
+        card.classList.remove('has-file');
+    }
+
+    function toggleSignatureSection() {
+        const checkbox = document.getElementById('enableDigitalSign');
+        const signatureSection = document.getElementById('signatureSection');
+
+        if (checkbox.checked) {
+            signatureSection.style.display = 'block';
+        } else {
+            signatureSection.style.display = 'none';
+            document.getElementById('signatureImage').value = '';
+            document.getElementById('signatureImageName').textContent = 'Signature.png';
+            document.getElementById('signatureKeywords').value = 'SellerSign, Signature';
+        }
+    }
+
+    function toggleWatermarkSection() {
+        const checkbox = document.getElementById('enableWatermark');
+        const watermarkSection = document.getElementById('watermarkSection');
+
+        if (checkbox.checked) {
+            watermarkSection.style.display = 'block';
+        } else {
+            watermarkSection.style.display = 'none';
+            // Reset values
+            document.querySelector('input[name="WatermarkType"][value="text"]').checked = true;
+            document.getElementById('watermarkText').value = 'CONFIDENTIAL';
+            document.getElementById('watermarkImage').value = '';
+            document.getElementById('watermarkImageName').textContent = 'No file chosen';
+            toggleWatermarkInput();
+        }
+    }
+
+    function toggleWatermarkInput() {
+        const textRadio = document.querySelector('input[name="WatermarkType"][value="text"]');
+        const textSection = document.getElementById('textWatermarkSection');
+        const pictureSection = document.getElementById('pictureWatermarkSection');
+
+        if (textRadio.checked) {
+            textSection.style.display = 'block';
+            pictureSection.style.display = 'none';
+        } else {
+            textSection.style.display = 'none';
+            pictureSection.style.display = 'block';
+        }
+    }
+
+    function updateFileName(input, displayId) {
+        const displayElement = document.getElementById(displayId);
+        if (input.files && input.files[0]) {
+            displayElement.textContent = input.files[0].name;
+        } else {
+            if (displayId === 'signatureImageName') {
+                displayElement.textContent = 'Signature.png';
+            } else if (displayId === 'watermarkImageName') {
+                displayElement.textContent = 'No file chosen';
+            }
+        }
+    }
+</script>

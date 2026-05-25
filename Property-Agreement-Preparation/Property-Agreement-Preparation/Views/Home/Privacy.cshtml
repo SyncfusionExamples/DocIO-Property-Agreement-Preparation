@@ -1,0 +1,270 @@
+﻿@{
+    ViewData["Title"] = "Privacy Policy";
+}
+
+<style>
+    body {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+    }
+
+    .privacy-container {
+        max-width: 900px;
+        margin: 50px auto;
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        padding: 50px;
+    }
+
+    .privacy-header {
+        text-align: center;
+        margin-bottom: 40px;
+        padding-bottom: 25px;
+        border-bottom: 3px solid #667eea;
+    }
+
+        .privacy-header h1 {
+            color: #0f172a;
+            font-size: 38px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .privacy-header p {
+            color: #64748b;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+    .privacy-section {
+        margin-bottom: 35px;
+    }
+
+        .privacy-section h2 {
+            color: #667eea;
+            font-size: 26px;
+            font-weight: 600;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .privacy-section h3 {
+            color: #334155;
+            font-size: 20px;
+            font-weight: 600;
+            margin-top: 20px;
+            margin-bottom: 12px;
+        }
+
+        .privacy-section p {
+            color: #475569;
+            line-height: 1.9;
+            margin-bottom: 16px;
+            text-align: justify;
+            font-size: 15px;
+        }
+
+        .privacy-section ul {
+            margin-left: 30px;
+            margin-bottom: 16px;
+        }
+
+        .privacy-section li {
+            color: #475569;
+            line-height: 1.9;
+            margin-bottom: 10px;
+            font-size: 15px;
+        }
+
+    .highlight-box {
+        background: #f0f3ff;
+        border-left: 5px solid #667eea;
+        padding: 25px;
+        margin: 30px 0;
+        border-radius: 8px;
+    }
+
+        .highlight-box h3 {
+            color: #4338ca;
+            margin-bottom: 12px;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .highlight-box p {
+            color: #3730a3;
+            margin: 0;
+            font-weight: 500;
+            line-height: 1.8;
+        }
+
+        .highlight-box ul {
+            margin-top: 12px;
+            margin-bottom: 0;
+        }
+
+        .highlight-box li {
+            color: #3730a3;
+        }
+
+    .warning-box {
+        background: #fef3c7;
+        border-left: 5px solid #f59e0b;
+        padding: 25px;
+        margin: 30px 0;
+        border-radius: 8px;
+    }
+
+        .warning-box h3 {
+            color: #92400e;
+            margin-bottom: 12px;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .warning-box p {
+            color: #78350f;
+            margin: 0;
+            font-weight: 500;
+            line-height: 1.8;
+        }
+
+    .icon {
+        font-size: 26px;
+    }
+
+    .contact-section {
+        background: #f8fafc;
+        border: 2px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 30px;
+        margin-top: 40px;
+        text-align: center;
+    }
+
+        .contact-section h3 {
+            color: #0f172a;
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        .contact-section p {
+            color: #64748b;
+            margin-bottom: 20px;
+        }
+
+        .contact-section a {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+
+            .contact-section a:hover {
+                background: #4f46e5;
+            }
+</style>
+
+<div class="privacy-container">
+    <div class="privacy-header">
+        <h1><span>🏘️</span> Privacy Policy</h1>
+        <p>Last Updated: May 6, 2026</p>
+    </div>
+
+    <div class="privacy-section">
+        <h2><span class="icon">📋</span> Introduction</h2>
+        <p>
+            Welcome to PropertyDoc - Property Agreement Generator. We understand the importance of property data security and confidentiality in document preparation. This Privacy Policy explains how our application handles legal templates and property database records during the agreement generation process.
+        </p>
+        <p>
+            Our application is designed as a document processing tool that helps professionals generate professional property agreements by merging Word document templates with property database records.
+        </p>
+    </div>
+
+    <div class="privacy-section">
+        <h2><span class="icon">🔒</span> Information We Process</h2>
+        <p>When you use our property agreement generation service, we temporarily process the following information:</p>
+
+        <h3>Legal Document Templates</h3>
+        <ul>
+            <li>Word document templates (.doc, .docx, .dot, .dotx, .docm, .dotm)</li>
+            <li>Agreement templates containing merge fields for property and owner information</li>
+        </ul>
+
+        <h3>Property Database Files</h3>
+        <ul>
+            <li>Access database files (.mdb) containing property records</li>
+            <li>Structured data including property details, owner information, transaction history, and agent details</li>
+            <li>Database relationships between multiple tables (Properties, Owners, Transactions, Agents)</li>
+            <li>Multiple property records for batch processing</li>
+        </ul>
+
+        <h3>Generated Agreements</h3>
+        <ul>
+            <li>Merged DOCX documents containing property-specific information</li>
+            <li>Converted PDF documents for final delivery and digital signatures</li>
+            <li>Single consolidated document or multiple individual property agreements</li>
+        </ul>
+    </div>
+
+    <div class="privacy-section">
+        <h2><span class="icon">⚙️</span> How We Process Your Data</h2>
+        <p>
+            Our application uses Syncfusion DocIO library to perform mail merge operations with Access database integration and document conversion. The processing workflow is as follows:
+        </p>
+
+        <h3>Document Processing Steps:</h3>
+        <ul>
+            <li><strong>Upload:</strong> Your Word template and Access database file (.mdb/.accdb) are uploaded to the server's temporary memory</li>
+            <li><strong>Database Reading:</strong> The application reads property records and relationships from the Access database based on your configured table relationships</li>
+            <li><strong>Mail Merge:</strong> Syncfusion DocIO performs advanced mail merge operations with group relationships to populate template fields with property data</li>
+            <li><strong>Format Selection:</strong> Based on your choice, generates either single consolidated agreement or multiple individual agreements</li>
+            <li><strong>Digital Signatures (Optional):</strong> If enabled, custom signature images are placed at specified keyword locations in the document</li>
+            <li><strong>Watermark (Optional):</strong> If enabled, a custom text or image watermark is added to the document.</li>
+            <li><strong>PDF Conversion:</strong> The merged document is converted to PDF format using Syncfusion DocIORenderer (if PDF format selected)</li>
+            <li><strong>Download:</strong> The generated agreement(s) are immediately sent to your browser for download</li>
+        </ul>
+    </div>
+
+    <div class="highlight-box">
+        <h3><span>💾</span> Access Database Integration</h3>
+        <p>
+            Our application reads data directly from your Access database files. We support standard Microsoft Access format (.mdb) with multi-table relationships.
+            Your database structure is completely customizable through our relationship configuration system.
+        </p>
+    </div>
+
+    <div class="warning-box">
+        <h3><span>⚠️</span> Important Note</h3>
+        <p>
+            All processing happens locally in your browser, and files <strong>never</strong>
+            go to any external server. Everything stays private and secure on your machine. ✔️
+        </p>
+    </div>
+
+    <div class="contact-section">
+        <h3>📧 Questions or Concerns?</h3>
+        <p>
+            If you have any questions about this Privacy Policy or how we handle legal document processing with database integration,
+            please contact support for technical assistance:
+        </p>
+        <a href="https://support.syncfusion.com/support/tickets/create" target="_blank">
+            Contact Support
+        </a>
+    </div>
+</div>
