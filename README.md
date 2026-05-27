@@ -76,7 +76,7 @@ https://localhost:5001
 ### Basic Workflow
 
 1. **Upload Template Document**
-   - Upload your Word template with merge fields
+   - Upload your Word template (.docx, .doc, .rtf) with merge fields
    - Drag & drop supported
    - Or use default template provided
 
