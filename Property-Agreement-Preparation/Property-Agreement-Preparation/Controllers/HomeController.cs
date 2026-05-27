@@ -331,7 +331,7 @@ namespace Property_Agreement_Preparation.Controllers
             if (file != null && file.Length > 0)
             {
                 string extension = Path.GetExtension(file.FileName).ToLower();
-                string[] supportedExtensions = { ".doc", ".docx", ".dot", ".dotx", ".dotm", ".docm", ".rtf", ".md", ".txt", ".html" };
+                string[] supportedExtensions = { ".doc", ".docx", ".dot", ".dotx", ".dotm", ".docm", ".rtf" };
 
                 if (supportedExtensions.Contains(extension))
                 {
